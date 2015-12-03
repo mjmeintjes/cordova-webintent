@@ -3,7 +3,8 @@ package com.borismus.webintent;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.cordova.CordovaActivity;
+import android.app.Activity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,7 +74,7 @@ public class WebIntent extends CordovaPlugin {
                     callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
                     return false;
                 }
-                Intent i = ((CordovaActivity)this.cordova.getActivity()).getIntent();
+                Intent i = ((Activity)this.cordova.getActivity()).getIntent();
                 String extraName = args.getString(0);
                 //return new PluginResult(PluginResult.Status.OK, i.hasExtra(extraName));
                 callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, i.hasExtra(extraName)));
@@ -85,7 +86,7 @@ public class WebIntent extends CordovaPlugin {
                     callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
                     return false;
                 }
-                Intent i = ((CordovaActivity)this.cordova.getActivity()).getIntent();
+                Intent i = ((Activity)this.cordova.getActivity()).getIntent();
                 String extraName = args.getString(0);
                 if (i.hasExtra(extraName)) {
                     //return new PluginResult(PluginResult.Status.OK, i.getStringExtra(extraName));
@@ -103,7 +104,7 @@ public class WebIntent extends CordovaPlugin {
                     return false;
                 }
 
-                Intent i = ((CordovaActivity)this.cordova.getActivity()).getIntent();
+                Intent i = ((Activity)this.cordova.getActivity()).getIntent();
                 String uri = i.getDataString();
                 //return new PluginResult(PluginResult.Status.OK, uri);
                 callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, uri));
@@ -201,7 +202,7 @@ public class WebIntent extends CordovaPlugin {
                 i.putExtra(key, value);
             }
         }
-        ((CordovaActivity)this.cordova.getActivity()).startActivity(i);
+        ((Activity)this.cordova.getActivity()).startActivity(i);
     }
 
     void sendBroadcast(String action, Map<String, String> extras) {
@@ -212,6 +213,6 @@ public class WebIntent extends CordovaPlugin {
             intent.putExtra(key, value);
         }
 
-        ((CordovaActivity)this.cordova.getActivity()).sendBroadcast(intent);
+        ((Activity)this.cordova.getActivity()).sendBroadcast(intent);
     }
 }
