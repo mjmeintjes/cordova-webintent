@@ -3,7 +3,10 @@
  * Copyright (c) Boris Smus 2010
  *
  */
- (function(cordova){
+
+ var exec = require('cordova/exec');
+     
+
     var WebIntent = function() {
 
     };
@@ -18,7 +21,7 @@
     WebIntent.prototype.ACTION_SENDTO = "android.intent.action.SENDTO";
 
     WebIntent.prototype.startActivity = function(params, success, fail) {
-        return cordova.exec(function(args) {
+        return exec(function(args) {
             success(args);
         }, function(args) {
             fail(args);
@@ -26,7 +29,7 @@
     };
 
     WebIntent.prototype.hasExtra = function(params, success, fail) {
-        return cordova.exec(function(args) {
+        return exec(function(args) {
             success(args);
         }, function(args) {
             fail(args);
@@ -34,7 +37,7 @@
     };
 
     WebIntent.prototype.getUri = function(success, fail) {
-        return cordova.exec(function(args) {
+        return exec(function(args) {
             success(args);
         }, function(args) {
             fail(args);
@@ -42,7 +45,7 @@
     };
 
     WebIntent.prototype.getExtra = function(params, success, fail) {
-        return cordova.exec(function(args) {
+        return exec(function(args) {
             success(args);
         }, function(args) {
             fail(args);
@@ -51,23 +54,21 @@
 
 
     WebIntent.prototype.onNewIntent = function(callback) {
-        return cordova.exec(function(args) {
+        return exec(function(args) {
             callback(args);
         }, function(args) {
         }, 'WebIntent', 'onNewIntent', []);
     };
 
     WebIntent.prototype.sendBroadcast = function(params, success, fail) {
-        return cordova.exec(function(args) {
+        return exec(function(args) {
             success(args);
         }, function(args) {
             fail(args);
         }, 'WebIntent', 'sendBroadcast', [params]);
     };
 
-    window.webintent = new WebIntent();
+    module.exports = new WebIntent();
     
-    // backwards compatibility
-    window.plugins = window.plugins || {};
-    window.plugins.webintent = window.webintent;
-})(window.PhoneGap || window.Cordova || window.cordova);
+    
+
